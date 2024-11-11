@@ -951,6 +951,7 @@ TH3F(io, tkey::TKey, refs) = TH(io, tkey, refs)
 TH1D(io, tkey::TKey, refs) = TH(io, tkey, refs)
 TH2D(io, tkey::TKey, refs) = TH(io, tkey, refs)
 TH3D(io, tkey::TKey, refs) = TH(io, tkey, refs)
+TH2I(io, tkey::TKey, refs) = TH(io, tkey, refs)
 
 """
     TH(io, tkey::TKey, refs)
