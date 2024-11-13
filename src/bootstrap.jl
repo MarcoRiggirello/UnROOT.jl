@@ -58,10 +58,20 @@ abstract type TNamed <: ROOTStreamedObject end
 # TODO: we probably should switch over to @kwdef at some point, but that's another big refactoring
 # Cursor is not needed here but it's mandatory due to the historical design of UnROOT and the
 # parsefields approach
+Base.@kwdef struct TNamed_0 <: TNamed
+    cursor::Cursor
+    fName::String
+    fTitle::String
+end
 Base.@kwdef struct TNamed_1 <: TNamed
     cursor::Cursor
     fName::String
     fTitle::String
+end
+function readfields!(io, fields, ::Type{TNamed_0})
+    parsefields!(io, fields, TObject)
+    fields[:fName] = readtype(io, String)
+    fields[:fTitle] = readtype(io, String)
 end
 function readfields!(io, fields, ::Type{TNamed_1})
     parsefields!(io, fields, TObject)
@@ -73,6 +83,11 @@ end
 # We need to define something like the following (that's not working, too tired already...)
 # parsefields!(c::Cursor, fields, TObject) = parsefields!(c.io, fields, TObject)
 # readtype(c::Cursor, ::Type{T}) where T = readtype(c.io, T)
+function readfields!(c::Cursor, fields, ::Type{TNamed_0})
+    parsefields!(c.io, fields, TObject)
+    fields[:fName] = readtype(c.io, String)
+    fields[:fTitle] = readtype(c.io, String)
+end
 function readfields!(c::Cursor, fields, ::Type{TNamed_1})
     parsefields!(c.io, fields, TObject)
     fields[:fName] = readtype(c.io, String)
