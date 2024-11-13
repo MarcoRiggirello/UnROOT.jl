@@ -130,6 +130,20 @@ end
 const TAttMarker_1 = TAttMarker_2
 
 abstract type TAttAxis <: ROOTStreamedObject end
+struct TAttAxis_0 <: TAttAxis end
+function readfields!(io, fields, T::Type{TAttAxis_0})
+    fields[:fNdivisions] = readtype(io, Int32)
+    fields[:fAxisColor] = readtype(io, Int16)
+    fields[:fLabelColor] = readtype(io, Int16)
+    fields[:fLabelFont] = readtype(io, Int16)
+    fields[:fLabelOffset] = readtype(io, Float32)
+    fields[:fLabelSize] = readtype(io, Float32)
+    fields[:fTickLength] = readtype(io, Float32)
+    fields[:fTitleOffset] = readtype(io, Float32)
+    fields[:fTitleSize] = readtype(io, Float32)
+    fields[:fTitleColor] = readtype(io, Int16)
+    fields[:fTitleFont] = readtype(io, Int16)
+end
 struct TAttAxis_4 <: TAttAxis end
 function readfields!(io, fields, T::Type{TAttAxis_4})
     fields[:fNdivisions] = readtype(io, Int32)
