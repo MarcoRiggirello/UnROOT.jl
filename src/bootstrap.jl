@@ -131,6 +131,21 @@ function readfields!(io, fields, T::Type{TAttAxis_4})
 end
 
 abstract type TAxis <: ROOTStreamedObject end
+struct TAxis_0 <: TAxis end
+function readfields!(io, fields, T::Type{TAxis_0})
+    # overrides things like fName,... that were set from the parent TH1 :(
+    stream!(io, fields, TNamed)
+    stream!(io, fields, TAttAxis)
+    fields[:fNbins] = readtype(io, Int32)
+    fields[:fXmin] = readtype(io, Float64)
+    fields[:fXmax] = readtype(io, Float64)
+    fields[:fXbins] = readtype(io, TArrayD)
+    fields[:fFirst] = readtype(io, Int16)
+    fields[:fLast] = readtype(io, Int16)
+    fields[:fBits2] = readtype(io, UInt16)
+    fields[:fTimeDisplay] = readtype(io, Bool)
+    fields[:fTimeFormat] = readtype(io, String)
+end
 struct TAxis_10 <: TAxis end
 function readfields!(io, fields, T::Type{TAxis_10})
     # overrides things like fName,... that were set from the parent TH1 :(
